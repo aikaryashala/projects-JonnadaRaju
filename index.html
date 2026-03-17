@@ -1,10 +1,448 @@
 <!DOCTYPE html>
-<html>
-<body>
-<h2> Project- 1 CityBus Advisor </h2>
-<a href="https://github.com/JonnadaRaju/CityBus-Advisor" >GitHub Repository</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Jonnada Raju</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cosmic-black: #000000;
+            --deep-space: #0a0a0f;
+            --nebula-purple: #7b2cbf;
+            --nebula-blue: #4361ee;
+            --nebula-pink: #f72585;
+            --star-white: #ffffff;
+            --comet-cyan: #00f5ff;
+            --galaxy-gold: #ffd700;
+        }
 
-<h2> Project - 2 Godavari Ghaatu E-commerce platform</h2>
-<a href="https://github.com/JonnadaRaju/Godavari-ghaatu/blob/main/SPEC.md">GitHub Repository</a>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--cosmic-black);
+            color: var(--star-white);
+            font-family: 'Space Mono', monospace;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Starfield Background */
+        .starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Nebula Background Effect */
+        .nebula {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.15;
+            background:
+                radial-gradient(ellipse at 20% 30%, var(--nebula-purple) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, var(--nebula-blue) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, var(--nebula-pink) 0%, transparent 60%);
+            filter: blur(80px);
+        }
+
+        /* Container */
+        .container {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Projects Section */
+        #projects {
+            min-height: 100vh;
+            padding: 4rem 0 8rem;
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.2s;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--comet-cyan), var(--galaxy-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(123, 44, 191, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .project-card:hover .project-image::after {
+            left: 100%;
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--galaxy-gold);
+        }
+
+        .project-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            padding: 0.4rem 1rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--comet-cyan);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--comet-cyan);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-btn {
+            flex: 1;
+            padding: 0.7rem 1.1rem;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-family: 'Space Mono', monospace;
+        }
+
+        .project-btn.live {
+            background: linear-gradient(135deg, var(--nebula-purple), var(--nebula-pink));
+            color: var(--star-white);
+            border: none;
+        }
+
+        .project-btn.live:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(247, 37, 133, 0.4);
+        }
+
+        .project-btn.source {
+            background: transparent;
+            color: var(--comet-cyan);
+            border: 1px solid var(--comet-cyan);
+        }
+
+        .project-btn.source:hover {
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Starfield Background -->
+    <div class="starfield" id="starfield"></div>
+
+    <!-- Nebula Effect -->
+    <div class="nebula"></div>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+
+                <!-- AI Banking Data Assistant -->
+                <div class="project-card">
+                    <div class="project-image">💻</div>
+                    <div class="project-info">
+                        <h3 class="project-title">AI Banking Data Assistant</h3>
+                        <p class="project-description">
+                            AI-powered banking assistant that converts natural language queries into SQL for real-time data visualization.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">OpenRouter</span>
+                            <span class="tag">Sarvam AI</span>
+                            <span class="tag">Supabase</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://ai-banking-data-assistant-frontend.onrender.com/" class="project-btn live" target="_blank">
+                                <span>🌐</span> Live Demo
+                            </a>
+                            <a href="https://github.com/JonnadaRaju/AI-Banking-Data-Assistant" class="project-btn source" target="_blank">
+                                <span>💻</span> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Codebase AI -->
+                <div class="project-card">
+                    <div class="project-image">⚡</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Codebase AI</h3>
+                        <p class="project-description">
+                            Intelligent assistant that understands entire project codebase, helping developers analyze, generate, debug, and improve code.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">RAG</span>
+                            <span class="tag">VectorDB</span>
+                            <span class="tag">ollama</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://codebase-ai.onrender.com/" class="project-btn live" target="_blank">
+                                <span>🌐</span> Live Demo
+                            </a>
+                            <a href="https://github.com/JonnadaRaju/Codebase-AI" class="project-btn source" target="_blank">
+                                <span>💻</span> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Agentic Video Assistant -->
+                <div class="project-card">
+                    <div class="project-image">🔧</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Agentic Video Assistant</h3>
+                        <p class="project-description">
+                            AI-powered platform for recording, transcription, semantic search, and intelligent querying of audio and video content.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">OpenRouter</span>
+                            <span class="tag">Sarvam AI</span>
+                            <span class="tag">PostgreSQL</span>
+                            <span class="tag">React</span>
+                            <span class="tag">MCP Server</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://aivideoassistant.12022001.xyz/" class="project-btn live" target="_blank">
+                                <span>🌐</span> Live Demo
+                            </a>
+                            <a href="https://github.com/JonnadaRaju/Agentic-Video-Assistant" class="project-btn source" target="_blank">
+                                <span>💻</span> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real Time Bottle Detection -->
+                <div class="project-card">
+                    <div class="project-image">🚀</div>
+                    <div class="project-info">
+                        <h3 class="project-title">Real Time Bottle Detection</h3>
+                        <p class="project-description">
+                            Real-time YOLOv8 object detection system identifying plastic and steel bottles with webcam inference and custom dataset training.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">YOLOv8</span>
+                            <span class="tag">Ultralytics</span>
+                            <span class="tag">Roboflow</span>
+                            <span class="tag">PyTorch</span>
+                            <span class="tag">OpenCV</span>
+                            <span class="tag">Python</span>
+                            <span class="tag">Google Colab</span>
+                            <span class="tag">Webcam API</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://huggingface.co/spaces/jonnadaraju147/water-bottle-detector" class="project-btn live" target="_blank">
+                                <span>🌐</span> Live Demo
+                            </a>
+                            <a href="https://github.com/JonnadaRaju/Real-Time-Bottle-Detection" class="project-btn source" target="_blank">
+                                <span>💻</span> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CityBus Advisor -->
+                <div class="project-card">
+                    <div class="project-image">🚌</div>
+                    <div class="project-info">
+                        <h3 class="project-title">CityBus Advisor</h3>
+                        <p class="project-description">
+                            A comprehensive analytics platform with real-time data visualization and AI-powered insights.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">FastAPI</span>
+                            <span class="tag">SQLite & PostgreSQL</span>
+                            <span class="tag">HTML</span>
+                            <span class="tag">TailwindCSS</span>
+                            <span class="tag">JavaScript</span>
+                        </div>
+                        <div class="project-actions">
+                            <a href="https://citybusadvisor.12022001.xyz/" class="project-btn live" target="_blank">
+                                <span>🌐</span> Live Demo
+                            </a>
+                            <a href="https://github.com/JonnadaRaju/CityBus-Advisor" class="project-btn source" target="_blank">
+                                <span>💻</span> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Generate starfield
+        function createStarfield() {
+            const starfield = document.getElementById('starfield');
+            const starCount = 150;
+
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+
+                const size = Math.random() * 2 + 1;
+                star.style.width = size + 'px';
+                star.style.height = size + 'px';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+
+                starfield.appendChild(star);
+            }
+        }
+
+        createStarfield();
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    entry.target.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach((el, index) => {
+            el.style.transitionDelay = (index * 0.1) + 's';
+            observer.observe(el);
+        });
+    </script>
 </body>
 </html>
